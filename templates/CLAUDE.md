@@ -77,7 +77,7 @@ Dual-memory architecture. Memory bank files are git-shared and read **on demand*
 <!-- TASKTRACKER SECTION — include only if a tasktracker MCP is available in sessions for this project; otherwise delete down to the next section. -->
 ## Tasktracker (Mandatory)
 
-Tasktracker MCP project **"{{TASKTRACKER_PROJECT_NAME}}"** (id `{{TASKTRACKER_PROJECT_ID}}`) is the system of record for requirements, architecture, and phased implementation plans — not markdown files. Run `tasktracker_getProjectReadiness` before assuming local docs reflect current planning state.
+Tasktracker MCP project **"{{TASKTRACKER_PROJECT_NAME}}"** (id `{{TASKTRACKER_PROJECT_ID}}`) is the system of record for requirements, architecture, and phased implementation plans — not markdown files, and not this file. **Before writing or trusting any state claim** here or in `CLAUDE-activeContext.md` (tech stack decided or not, architecture exists or not, planning started or not) — run `tasktracker_getProjectBrief` (verbosity `fat`) **and** `tasktracker_getProjectReadiness` on this project. `tasktracker_listProjects`' one-line description is not enough: a project can already hold a finalized architecture/stack decision and hundreds of tasks even when the local checkout is empty or new. Re-run this check at the start of any session where you're about to assert what state the project is in.
 
 **MUST use the tasktracker-native (`tt-*`) skills for all planning/implementation work on this project — never the file-based equivalents:**
 

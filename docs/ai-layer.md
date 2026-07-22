@@ -6,6 +6,7 @@ The memory bank gives sessions *state*; the AI Layer gives them *navigation and 
 
 - The repo has (or is about to grow) a real codebase — multiple modules, more than a few thousand lines.
 - Skip it for docs-only or trivial projects; the memory bank alone is enough there.
+- Before deciding a stack is "not yet chosen" and deferring the components below on that basis, check the project's system of record (a tasktracker MCP project, ADRs, a docs file) — a stack/architecture decision can already be finalized there even though no code has been written in any repo yet. "No code exists" and "no stack decided" are different facts.
 
 ## The prompt
 
