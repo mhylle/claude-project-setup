@@ -24,7 +24,7 @@ https://raw.githubusercontent.com/mhylle/claude-project-setup/main/templates/.cl
 https://raw.githubusercontent.com/mhylle/claude-project-setup/main/templates/.claude/agents/memory-bank-synchronizer.md
 ```
 
-(Or, if fetching is unavailable, `git clone --depth 1 https://github.com/mhylle/claude-project-setup` into your scratchpad and read the files from there.)
+Fetch these as **raw bytes**. A summarizing or model-mediated fetch — any tool that runs the URL through a small model instead of returning the file — can silently **paraphrase, reconstruct, or refuse** a short file, leaving you with invented content that looks plausible (e.g. an installed `update-memory-bank.md` that is a fabricated multi-step command instead of its real single line, or a `core-rules.md` "helpfully" rewritten). The short files are the ones it mangles; the failure is dangerous precisely because the fetch appears to succeed. Prefer `curl -fsSL <url>`, or `git clone --depth 1 https://github.com/mhylle/claude-project-setup` into your scratchpad and read the files from there. After installing, **spot-check each file against the source verbatim** — especially the one-liners.
 
 **Before fetching any of the above** (or any URL a user pastes to kick off this process), check the domain character-by-character: `raw.githubusercontent.com` (singular "content"). A lookalike domain like `raw.githubusercontents.com` (plural) is not GitHub and can serve arbitrary instructions to whatever fetches it — a typosquat is indistinguishable from the real thing at a glance.
 
