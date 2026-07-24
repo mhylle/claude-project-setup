@@ -87,6 +87,16 @@ Tasktracker MCP project **"{{TASKTRACKER_PROJECT_NAME}}"** (id `{{TASKTRACKER_PR
 | `tt-create-plan` | `create-plan` | New requirements / phases |
 | `tt-implement-plan`, `tt-implement-phase` | `implement-plan`, `implement-phase` | Executing the plan |
 
+**Time tracking is mandatory, not optional bookkeeping — and `setActiveTask` does NOT start a timer by itself.** Verified empirically (2026-07-24): calling it alone, even across 60+ real seconds of work, never opens a running timer — its heartbeat only creates a near-instantaneous blip. The only mechanism that measures real elapsed time is the explicit pair below. Skipping it undercounts actual effort by roughly 3–4x, which defeats the whole point of tracking implementation time in tasktracker.
+
+1. Immediately after `tasktracker_setActiveTask(<taskId>)`, call `tasktracker_startTimer(<taskId>)` explicitly — every time focus shifts to a new task, not just once per session.
+2. Leave it running through the entire real work stretch on that task (writing code, running builds/tests, iterating) regardless of which tools you use in between.
+3. Call `tasktracker_stopTimer(<taskId>)` only when work on that task genuinely pauses or finishes — not around every small tasktracker bookkeeping call.
+4. Call `tasktracker_pauseActiveTask` before any message that ends a turn waiting on the user — the user's thinking time is not work time.
+5. If a reported duration looks implausibly low, verify with `tasktracker_getTimeSummary` before trusting it.
+
+(If no tasktracker MCP is available for this project, there is no time-tracking mechanism to substitute — skip this subsection along with the rest of this Tasktracker section.)
+
 <!-- END TASKTRACKER SECTION -->
 
 ## Development History Requirement
