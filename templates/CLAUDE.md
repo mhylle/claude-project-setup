@@ -47,6 +47,32 @@ Transform tasks into verifiable goals: "Add validation" → "Write tests for inv
 
 For multi-step tasks, state a brief plan with a verify step per item. Strong success criteria let you loop independently; weak criteria ("make it work") require constant clarification.
 
+### 5. Never Destroy Uncommitted Work
+
+**A command that discards uncommitted changes requires the user to have asked for that specific command, in that specific moment. Never on your own initiative. Ever.**
+
+Uncommitted work is unrecoverable. `git reflog` does not cover it, no stash is created, editor local-history often isn't there. When it's gone, it's gone — and it is the user's work, not yours.
+
+Never run any of these unless the user explicitly asked for that exact destructive action:
+
+| Command | Destroys |
+|---|---|
+| `git reset --hard` | every uncommitted change to tracked files |
+| `git checkout -- <path>` / `git restore <path>` | that path's uncommitted changes |
+| `git checkout -f` / `git switch -f` | uncommitted changes blocking the switch |
+| `git clean -fd` | untracked files (often the newest, least-backed-up work) |
+| `git stash drop` / `git stash clear` | stashed work, permanently |
+| `git push --force` | commits on the remote, for everyone |
+| `rm -rf` on anything you didn't create | the obvious |
+
+**"Get to a clean state" is not a goal.** It is the rationalization that precedes the damage. Ask what you actually need, then pick the non-destructive command that does it:
+
+- Start a branch from a remote ref → `git switch -c <name> origin/main`. It carries dirty files across and *refuses* rather than destroying when it can't.
+- Need the tree clean first → `git stash push` (recoverable), never `reset --hard`.
+- Undo your own bad commit → `git revert`, or `git reset --soft`, which keeps the working tree.
+
+**Before any command that changes branch or tree state, run `git status`.** Dirty tracked files you did not create are the user's in-flight work. Their presence is a stop sign, not an obstacle to clear. If a destructive command genuinely seems necessary, say what it would destroy and ask first.
+
 ## Project Overview
 
 - **Name:** {{PROJECT_NAME}} — {{ONE_LINE_DESCRIPTION}}
