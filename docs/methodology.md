@@ -24,6 +24,8 @@ Claude Code's native auto memory mirrors the key facts. It's the recovery path i
 
 Four rules at the top of CLAUDE.md — think before coding, simplicity first, surgical changes, goal-driven execution. They exist because these are the four most common LLM failure modes: silent assumptions, speculative over-engineering, drive-by refactoring, and unverifiable "done".
 
+The fourth rule carries a hard definition of done: **tested end-to-end as a user would use it**. This is the one most often claimed without being true. A project can have a green suite, integration tests against real infrastructure, and per-feature verification scripts, and still have never once started the process a user would start — because each script wired the parts together itself. The wiring a harness replaces is real, shippable, untested code.
+
 ### 4. History discipline
 
 Only meaningful state transitions get logged — finalized features, decisions, resolved investigations, milestones. Typo fixes and intermediate saves don't. The bar: would a future session act differently for knowing this?

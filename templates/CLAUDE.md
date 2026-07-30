@@ -47,6 +47,8 @@ Transform tasks into verifiable goals: "Add validation" → "Write tests for inv
 
 For multi-step tasks, state a brief plan with a verify step per item. Strong success criteria let you loop independently; weak criteria ("make it work") require constant clarification.
 
+**An application is not done until it has been tested end-to-end the way a user would actually use it.** Not "the logic was exercised" — *the real entrypoints*, started and driven as a user or operator would drive them: the binary, the HTTP route, the button. A test harness that wires the components together itself is testing the components; the composition it substitutes for is untested code, and it is exactly the code a user hits first. Before claiming done, ask: **which entrypoints has nobody actually run?** A green suite cannot answer that, and neither can integration tests against real infrastructure if a script assembled the wiring.
+
 ### 5. Never Destroy Uncommitted Work
 
 **A command that discards uncommitted changes requires the user to have asked for that specific command, in that specific moment. Never on your own initiative. Ever.**
